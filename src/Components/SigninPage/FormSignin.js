@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 
 const FormSignin = ({ submitForm }) => {
-  const { handleChange, handleSubmit, values, errors } = useForm(
+  const { handleChange, handleSubmit, values, errors, isSubmitting } = useForm(
     submitForm,
     validate
   );
@@ -47,7 +47,7 @@ const FormSignin = ({ submitForm }) => {
           {errors.password && <p>{errors.password}</p>}
         </div>
 
-        <button className='form-input-btn' type='submit'>Sign In</button>
+        <button className='form-input-btn' type='submit'>{isSubmitting?'Loading . . .' : 'Sign In'}</button>
         <span className='form-input-login'>
           Do not have an account? Sign up <Link to='./'>here</Link>
         </span>

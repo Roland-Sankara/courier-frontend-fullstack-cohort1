@@ -36,9 +36,30 @@ const Section = () => {
     )
     
 
-//   const remove= (id)=>{
-//     axios.delete(`https://courier-fullstack-api.herokuapp.com/api/v1/parcels/${id}`)
-//   }
+  const remove= (e)=>{
+    let orderID = e.target.dataset.orderid;
+    console.log(orderID)
+    let apiUrl = `https://courier-backend-fullstack1.herokuapp.com/api/v1/parcels/${orderID}`;
+    fetch(apiUrl,{
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+    .then((res)=>{
+        if(!res.ok){
+            throw new Error('Failed to Delete Order');
+        }
+        return res.json();
+    })
+    .then((result)=>{
+        console.log(result)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}
 
     return (
         <>
@@ -73,8 +94,8 @@ const Section = () => {
                                                 <div className="list-icons">
                                                     <Link to= "/CreateOrder" className="icon" ><i className="fas fa-edit icon"></i></Link >
                                                 
-                                                    {/* <i className="fas fa-trash-alt icon" onClick ={remove(order._id)}></i> */}
-                                                    <i className="fas fa-trash-alt icon" ></i>
+                                                    <i className="fas fa-trash-alt icon" data-orderID={order._id} onClick ={remove}></i>
+                                                    {/* <i className="fas fa-trash-alt icon" ></i> */}
                                                 </div>
                                             </div>
                                             

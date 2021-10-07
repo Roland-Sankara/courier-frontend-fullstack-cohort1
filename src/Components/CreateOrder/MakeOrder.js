@@ -1,6 +1,5 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
-import axios from 'axios';
 import Form from './Form'
 import { useState } from 'react'
 
@@ -8,38 +7,44 @@ import { useState } from 'react'
 const MakeOrder = () => {
     const [itemname, setItemname] = useState("")
     const [sendersname, setSendersname] = useState(null)
-    const [ senderscontact, setSenderscontact] = useState(null)
-    const [ senderslocation, setSenderslocation] = useState(null)
+    const [senderscontact, setSenderscontact] = useState(null)
+    const [senderslocation, setSenderslocation] = useState(null)
     const [receiversname, setReceiversname] = useState(null)
     const [receiverscontact, setReceiverscontact] = useState(null)
     const [receiverslocation, setReceiverslocation] = useState(null)
-    const [ setData] = useState(null)
     let history = useHistory();
 
     const inforData = {
-            itemname:itemname,
-            sendersname:sendersname,
-            senderscontact:senderscontact,
-            senderslocation:senderslocation,
-            receiversname:receiversname,
-            receiverscontact:receiverscontact,
-            receiverslocation:receiverslocation
+        itemname:itemname,
+        sendersname:sendersname,
+        senderscontact:senderscontact,
+        senderslocation:senderslocation,
+        receiversname:receiversname,
+        receiverscontact:receiverscontact,
+        receiverslocation:receiverslocation
     }
-    
-    const baseURL = "https://courier-fullstack-api.herokuapp.com/api/v1/parcels"
+
+    const baseURL = "https://courier-backend-fullstack1.herokuapp.com/api/v1/parcels"
 
     function post(){
-        axios.post(baseURL, inforData)
-
-        .then((res)=>{
-            console.log(res);
-            setData((res))
-            console.log("Data sent")
-            history.push("/OrderPage")
-            window.location.reload()
+        fetch(baseURL,{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(inforData)
         })
-        .catch((err)=>{
-            console.log(err)
+        .then((response)=>{
+            if(!response.ok){
+                throw new Error('Failed to Create Order')
+            }
+            return response.json();
+        })
+        .then((result)=>{
+            console.log(result);
+            history.push("/OrderPage");
+
         })
     }
 
