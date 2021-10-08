@@ -44,7 +44,6 @@ const MakeOrder = () => {
         .then((result)=>{
             console.log(result);
             history.push("/OrderPage");
-
         })
     }
 
@@ -78,9 +77,7 @@ const MakeOrder = () => {
                 </ol>
             </form>
             <div className='button-container' >
-            {/* <Link to = "/OrderPage"> */}
             <button type= 'reset' className='button' onClick = {post}>Create Order</button>
-            {/* </Link>             */}
              </div>
         </div>
     )

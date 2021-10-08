@@ -37,7 +37,6 @@ const Section = () => {
 
   const remove= (e)=>{
     let orderID = e.target.dataset.orderid;
-    console.log(orderID)
     let apiUrl = `https://courier-backend-fullstack1.herokuapp.com/api/v1/parcels/${orderID}`;
     fetch(apiUrl,{
         method: 'DELETE',

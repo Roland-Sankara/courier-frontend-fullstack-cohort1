@@ -23,7 +23,7 @@ const Profile = () => {
         {/* Username Display */}
             <div className="user__name">
                 <div className="input" >
-                    {localStorage.userName}
+                    {localStorage.username}
                 </div>
             </div>
 

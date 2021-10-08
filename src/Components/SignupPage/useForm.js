@@ -35,7 +35,6 @@ const useForm = (callback, validate) => {
 
   useEffect(
     () => {
-        console.log(values);
         if(Object.keys(errors).length === 0 && isSubmitting){
           let URL = 'https://courier-backend-fullstack1.herokuapp.com/api/v1/users/signup';
 
