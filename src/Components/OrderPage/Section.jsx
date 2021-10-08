@@ -1,5 +1,4 @@
 import React,{ useEffect, useState} from 'react'
-// import axios from 'axios';
 import './Section.css'
 import {Link} from 'react-router-dom';
 
@@ -54,7 +53,9 @@ const Section = () => {
         return res.json();
     })
     .then((result)=>{
-        console.log(result)
+        console.log(result);
+        alert(result);
+        window.location.pathname = '/OrderPage';
     })
     .catch((err)=>{
         console.log(err)
@@ -83,19 +84,18 @@ const Section = () => {
                             <li >
                                 {infor.map(order=>{
                                     return(
-                                        <div>
-                                            <div key = {order._id} className ="item">
-                                                <p>{order.itemname}</p>
-                                                <p>{order.sendersname}</p>
-                                                <p>{order.senderscontact}</p>
-                                                <p>{order.receiversname}</p>
-                                                <p>{order.receiverscontact}</p>
-                                                <p>{order.receiverslocation}</p>
-                                                <div className="list-icons">
-                                                    <Link to= "/CreateOrder" className="icon" ><i className="fas fa-edit icon"></i></Link >
+                                        <div key={order._id+10}>
+                                            <div key={order._id} className ="item">
+                                                <p key={order._id+1}>{order.itemname}</p>
+                                                <p key={order._id+2}>{order.sendersname}</p>
+                                                <p key={order._id+3}>{order.senderscontact}</p>
+                                                <p key={order._id+4}>{order.receiversname}</p>
+                                                <p key={order._id+5}>{order.receiverscontact}</p>
+                                                <p key={order._id+6}>{order.receiverslocation}</p>
+                                                <div key={order._id+7} className="list-icons">
+                                                    <Link key={order._id+8} to= "/CreateOrder" className="icon" ><i className="fas fa-edit icon"></i></Link >
                                                 
-                                                    <i className="fas fa-trash-alt icon" data-orderID={order._id} onClick ={remove}></i>
-                                                    {/* <i className="fas fa-trash-alt icon" ></i> */}
+                                                    <i key={order._id+9} className="fas fa-trash-alt icon" data-orderid={order._id} onClick ={remove}></i>
                                                 </div>
                                             </div>
                                             
